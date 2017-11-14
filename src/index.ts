@@ -11,10 +11,6 @@ interface IHandlebarsAttrs extends jdistsUtil.IAttrs {
    * 扩展函数
    */
   extend?: string
-  /**
-   * 是否重新编译，默认为需要
-   */
-  rework?: string
 }
 
 /**
@@ -24,10 +20,8 @@ interface IHandlebarsAttrs extends jdistsUtil.IAttrs {
  * @param attrs 属性
  * @param attrs.data 数据项，支持 JSON 和 YAML
  * @param attrs.extend 扩展函数
- * @param attrs.rework 是否重新编译
  * @param scope 作用域
  * @param scope.execImport 导入数据
- * @param scope.compile 编译 jdists 文本
  * @return 返回渲染后的结果
  * @example processor():base
   ```js
@@ -41,18 +35,14 @@ interface IHandlebarsAttrs extends jdistsUtil.IAttrs {
         age: 13
       `
     },
-    compile: function (content) {
-      return 'compile:' + content
-    },
   }
   console.log(processor('<b>{{name}} - {{age}}</b>', attrs, scope))
-  // > compile:<b>tom - 13</b>
+  // > <b>tom - 13</b>
   ```
- * @example processor():execImport is object & rework is No
+ * @example processor():execImport is object
   ```js
   let attrs = {
     data: '#name',
-    rework: 'No'
   }
   let scope = {
     execImport: function (importion) {
@@ -60,9 +50,6 @@ interface IHandlebarsAttrs extends jdistsUtil.IAttrs {
         name: 'tom',
         age: 13,
       }
-    },
-    compile: function (content) {
-      return 'compile:' + content
     },
   }
   console.log(processor('<b>{{name}} - {{age}}</b>', attrs, scope))
@@ -81,12 +68,9 @@ interface IHandlebarsAttrs extends jdistsUtil.IAttrs {
     execImport: function (importion) {
       return importion
     },
-    compile: function (content) {
-      return 'compile:' + content
-    },
   }
   console.log(processor('{{ordinalize 1}}', attrs, scope))
-  // > compile:1st
+  // > 1st
   ```
  * @example processor():content is null
   ```js
@@ -114,9 +98,5 @@ export = (function (content: string, attrs: IHandlebarsAttrs, scope: jdistsUtil.
     extend(handlebars)
   }
 
-  if (jdistsUtil.isNo(attrs.rework)) {
-    return render(data)
-  } else {
-    return scope.compile(render(data))
-  }
+  return render(data)
 }) as jdistsUtil.IProcessor

@@ -24,19 +24,15 @@ describe("src/index.ts", function () {
         age: 13
       `
     },
-    compile: function (content) {
-      return 'compile:' + content
-    },
   }
   examplejs_print(processor('<b>{{name}} - {{age}}</b>', attrs, scope))
-  assert.equal(examplejs_printLines.join("\n"), "compile:<b>tom - 13</b>"); examplejs_printLines = [];
+  assert.equal(examplejs_printLines.join("\n"), "<b>tom - 13</b>"); examplejs_printLines = [];
   });
           
-  it("processor():execImport is object & rework is No", function () {
+  it("processor():execImport is object", function () {
     examplejs_printLines = [];
   let attrs = {
     data: '#name',
-    rework: 'No'
   }
   let scope = {
     execImport: function (importion) {
@@ -44,9 +40,6 @@ describe("src/index.ts", function () {
         name: 'tom',
         age: 13,
       }
-    },
-    compile: function (content) {
-      return 'compile:' + content
     },
   }
   examplejs_print(processor('<b>{{name}} - {{age}}</b>', attrs, scope))
@@ -66,12 +59,9 @@ describe("src/index.ts", function () {
     execImport: function (importion) {
       return importion
     },
-    compile: function (content) {
-      return 'compile:' + content
-    },
   }
   examplejs_print(processor('{{ordinalize 1}}', attrs, scope))
-  assert.equal(examplejs_printLines.join("\n"), "compile:1st"); examplejs_printLines = [];
+  assert.equal(examplejs_printLines.join("\n"), "1st"); examplejs_printLines = [];
   });
           
   it("processor():content is null", function () {
