@@ -1,6 +1,5 @@
 import * as handlebars from 'handlebars'
 import * as jdistsUtil from 'jdists-util'
-import * as jsyaml from 'js-yaml'
 
 interface IHandlebarsAttrs extends jdistsUtil.IAttrs {
   /**
