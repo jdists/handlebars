@@ -19,26 +19,9 @@ describe("src/index.ts", function () {
   }
   let scope = {
     execImport: function (importion) {
-      return `
-        name: tom
-        age: 13
-      `
-    },
-  }
-  examplejs_print(processor('<b>{{name}} - {{age}}</b>', attrs, scope))
-  assert.equal(examplejs_printLines.join("\n"), "<b>tom - 13</b>"); examplejs_printLines = [];
-  });
-          
-  it("processor():execImport is object", function () {
-    examplejs_printLines = [];
-  let attrs = {
-    data: '#name',
-  }
-  let scope = {
-    execImport: function (importion) {
       return {
         name: 'tom',
-        age: 13,
+        age: 13
       }
     },
   }

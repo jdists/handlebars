@@ -1,6 +1,6 @@
 {
   "name": "@jdists/handlebars",
-  "version": "0.0.2",
+  "version": "0.0.5",
   "description": "handlebars as jdists processor",
   "main": "lib/index",
   "typings": "lib/index.d.ts",
@@ -33,7 +33,7 @@
   "homepage": "https://github.com/jdists/handlebars#readme",
   "dependencies": {
     "handlebars": "^4.0.11",
-    "js-yaml": "^3.10.0"
+    "jdists-util": "^0.1.2"
   },
   "devDependencies": {
     "@types/handlebars": "^4.0.36",
@@ -45,7 +45,6 @@
     "gulp-typescript": "^3.1.6",
     "handlebars-helpers": "^0.9.8",
     "istanbul": "^0.3.17",
-    "jdists-util": "^0.1.0",
     "merge2": "^1.1.0",
     "mocha": "^2.0.1",
     "should": "^4.1.0",

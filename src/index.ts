@@ -30,25 +30,9 @@ interface IHandlebarsAttrs extends jdistsUtil.IAttrs {
   }
   let scope = {
     execImport: function (importion) {
-      return `
-        name: tom
-        age: 13
-      `
-    },
-  }
-  console.log(processor('<b>{{name}} - {{age}}</b>', attrs, scope))
-  // > <b>tom - 13</b>
-  ```
- * @example processor():execImport is object
-  ```js
-  let attrs = {
-    data: '#name',
-  }
-  let scope = {
-    execImport: function (importion) {
       return {
         name: 'tom',
-        age: 13,
+        age: 13
       }
     },
   }
@@ -86,15 +70,12 @@ export = (function (content: string, attrs: IHandlebarsAttrs, scope: jdistsUtil.
   let render = handlebars.compile(content)
   let data = null
   if (attrs.data) {
-    data = scope.execImport(attrs.data)
-    if (typeof data === 'string') {
-      data = jsyaml.safeLoad(data)
-    }
+    data = scope.execImport(attrs.data, true)
   }
 
   let extend = null
   if (attrs.extend) {
-    extend = jdistsUtil.buildFunction(scope.execImport(attrs.extend), 'handlebars')
+    extend = jdistsUtil.buildFunction(String(scope.execImport(attrs.extend)), 'handlebars')
     extend(handlebars)
   }
 
